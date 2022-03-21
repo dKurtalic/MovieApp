@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var editText: EditText
     private lateinit var button: Button
     private val listaVrijednosti = arrayListOf<String>()
-    private lateinit var adapter: ArrayAdapter<String>
+    private lateinit var adapter: MyArrayAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         button=findViewById<Button>(R.id.button1)
         editText=findViewById<EditText>(R.id.editText1)
         listView=findViewById<ListView>(R.id.listView1)
-        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, listaVrijednosti)
+        adapter = MyArrayAdapter(this,R.layout.element_liste, listaVrijednosti)
         listView.adapter=adapter
 
         button.setOnClickListener(){
