@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Meine App</string>
+    <string name="recentMovies">Aktuelle Filme</string>
+    <string name="search">suche</string>
+    <string name="favoriteMovies">Lieblingsfilme</string>
+</resources>

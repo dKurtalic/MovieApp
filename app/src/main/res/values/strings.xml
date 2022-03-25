@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">My Application</string>
-    <string name="recent">recent</string>
     <string name="recentMovies">Recent movies</string>
     <string name="search">search</string>
     <string name="favoriteMovies">Favorite movies</string>
