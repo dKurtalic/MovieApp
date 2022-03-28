@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -8,6 +9,7 @@ import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.data.Movie
 import com.example.myapplication.view.MovieListAdapter
 import com.example.myapplication.viewmodel.MovieListViewModel
 
@@ -34,13 +36,20 @@ private var movieListViewModel= MovieListViewModel()
             this,
             LinearLayoutManager.HORIZONTAL,
             false)
-        favoriteMoviesAdapter = MovieListAdapter(listOf())
-        recentMoviesAdapter = MovieListAdapter(listOf())
+        favoriteMoviesAdapter = MovieListAdapter(listOf()) {movie -> showMovieDetails(movie)}
+        recentMoviesAdapter = MovieListAdapter(listOf()) {movie -> showMovieDetails(movie)}
         favoriteMovies.adapter = favoriteMoviesAdapter
         recentMovies.adapter = recentMoviesAdapter
         favoriteMoviesAdapter.updateMovies(movieListViewModel.getFavoriteMovies())
         recentMoviesAdapter.updateMovies(movieListViewModel.getRecentMovies())
     }
+    private fun showMovieDetails(movie: Movie){
+        val intent= Intent(this, MovieDetailActivity::class.java).apply {
+            putExtra("movie_title", movie.title);
+        }
+        startActivity(intent)
+    }
+
 
 
 }

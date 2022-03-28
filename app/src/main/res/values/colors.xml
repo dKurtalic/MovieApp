@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="lilac">#F181ED</color>
     <color name="darklilac">#8B2588</color>
+    <color name="highlightColor">#30C5FF</color>
 </resources>

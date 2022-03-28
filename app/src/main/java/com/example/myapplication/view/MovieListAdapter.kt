@@ -13,7 +13,9 @@ import com.example.myapplication.R
 import com.example.myapplication.data.Movie
 
 class MovieListAdapter
-    (private var moviesArray: List<Movie>): RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>() {
+    (private var moviesArray: List<Movie>,
+     private val onItemClicked: (movie:Movie) -> Unit)
+    : RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>() {
 
         inner class MovieViewHolder(pogled:View): RecyclerView.ViewHolder(pogled){
             val movieImage=pogled.findViewById<ImageView>(R.id.movieImage)
@@ -35,6 +37,10 @@ class MovieListAdapter
         if (id===0) id=context.resources
             .getIdentifier("romantic", "drawable", context.packageName)
         holder.movieImage.setImageResource(id)
+
+        holder.itemView.setOnClickListener{
+            onItemClicked(moviesArray[position])
+        }
         }
 
     override fun getItemCount(): Int {
