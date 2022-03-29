@@ -2,9 +2,6 @@ package com.example.myapplication.viewmodel
 
 import com.example.myapplication.data.Movie
 import com.example.myapplication.data.MovieRepository
-import com.example.myapplication.data.favoriteMovies
-
-
 class MovieDetailViewModel {
     fun getMovieByTitle(name: String):Movie{
         var movies : ArrayList<Movie> = arrayListOf()

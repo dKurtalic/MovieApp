@@ -2,10 +2,6 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -45,7 +41,7 @@ private var movieListViewModel= MovieListViewModel()
     }
     private fun showMovieDetails(movie: Movie){
         val intent= Intent(this, MovieDetailActivity::class.java).apply {
-            putExtra("movie_title", movie.title);
+            putExtra("movie_title", movie.title)
         }
         startActivity(intent)
     }

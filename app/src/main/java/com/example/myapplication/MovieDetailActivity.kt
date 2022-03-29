@@ -1,6 +1,9 @@
 package com.example.myapplication
 
+import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
@@ -22,7 +25,7 @@ class MovieDetailActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.movie_details_layout)
-        title=findViewById(R.id.movieTitle)
+        title=findViewById(R.id.movie_title)
         releaseDate=findViewById(R.id.movie_release_date)
         genre=findViewById(R.id.movie_genre)
         overview=findViewById(R.id.movie_overview)
@@ -37,8 +40,19 @@ class MovieDetailActivity : AppCompatActivity(){
         else {
             finish()
         }
+        website.setOnClickListener(){showWebsite()}
 
     }
+    private fun showWebsite(){
+        val webIntent : Intent = Uri.parse(movie.homepage).let{ webpage ->
+            Intent(Intent.ACTION_VIEW, webpage)
+        }
+        try {
+            startActivity(webIntent)
+        } catch (e: ActivityNotFoundException) {
+        }
+    }
+
     private fun populateDetails(){
         title.text=movie.title
         genre.text=movie.genre
@@ -53,4 +67,5 @@ class MovieDetailActivity : AppCompatActivity(){
         poster.setImageResource(id)
 
     }
+
 }
