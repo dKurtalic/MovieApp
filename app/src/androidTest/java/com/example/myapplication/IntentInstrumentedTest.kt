@@ -53,6 +53,17 @@ class IntentInstrumentedTest {
         intended(hasAction(Intent.ACTION_VIEW))
         Intents.release()
     }
+    @Test
+    fun testYouTubeLink(){
+        Intents.init()
+        val nextStep: Intent=Intent(ApplicationProvider.getApplicationContext(), MovieDetailActivity::class.java)
+        nextStep.putExtra("movie_title","House of Gucci")
+        launchActivity<MovieDetailActivity>(nextStep)
+        onView((withId(R.id.movie_title))).perform(click())
+        intended(hasAction(Intent.ACTION_VIEW))
+        Intents.release()
+    }
+
 }
 
 
