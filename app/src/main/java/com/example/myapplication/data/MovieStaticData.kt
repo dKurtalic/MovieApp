@@ -31,7 +31,7 @@ fun favoriteMovies():List<Movie>{
 fun recentMovies():List<Movie>{
     return listOf(
         Movie(11,"Bridget Jones's Diary","Bridget Jones is determined to improve herself while she looks for love in a year in which she keeps a personal diary.","13.4.2001","https://www.imdb.com/title/tt0243155/","comedy"),
-        Movie(12," The Devil Wears Prada ","A smart but sensible new graduate lands a job as an assistant to Miranda Priestly, the demanding editor-in-chief of a high fashion magazine.","30.6.2006","https://www.imdb.com/title/tt0458352/","drama"),
+        Movie(12,"The Devil Wears Prada","A smart but sensible new graduate lands a job as an assistant to Miranda Priestly, the demanding editor-in-chief of a high fashion magazine.","30.6.2006","https://www.imdb.com/title/tt0458352/","drama"),
         Movie(13,"The fast and furious", "Los Angeles police officer Brian O'Conner must decide where his loyalty really lies when he becomes enamored with the street racing world he has been sent undercover to destroy.","https://www.imdb.com/title/tt0232500/","22.6.2001", "thriller")
     )
 }
