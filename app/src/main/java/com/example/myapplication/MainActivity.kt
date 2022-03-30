@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.Toast
@@ -18,6 +19,8 @@ private lateinit var recentMovies: RecyclerView
 private lateinit var favoriteMoviesAdapter: MovieListAdapter
 private lateinit var recentMoviesAdapter: MovieListAdapter
 private var movieListViewModel= MovieListViewModel()
+
+    lateinit var internetBroadcastReceiver: InternetBroadcastReceiver
 
 
 private lateinit var searchText: EditText
@@ -41,11 +44,20 @@ private lateinit var searchText: EditText
         recentMovies.adapter = recentMoviesAdapter
         favoriteMoviesAdapter.updateMovies(movieListViewModel.getFavoriteMovies())
         recentMoviesAdapter.updateMovies(movieListViewModel.getRecentMovies())
+        internetBroadcastReceiver= InternetBroadcastReceiver()
 
         searchText=findViewById(R.id.searchText)
         if(intent?.action == Intent.ACTION_SEND && intent?.type == "text/plain"){
             handleSendText(intent)
         }
+
+        IntentFilter("android.net.conn.CONNECTIVITY_CHANGE").also {
+            registerReceiver(internetBroadcastReceiver,it)
+        }
+    }
+    override fun onStop() {
+        super.onStop()
+        unregisterReceiver(internetBroadcastReceiver)
     }
 
     private fun handleSendText(intent: Intent) {
