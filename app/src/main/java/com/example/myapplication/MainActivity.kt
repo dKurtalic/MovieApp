@@ -2,6 +2,8 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +20,7 @@ private lateinit var recentMoviesAdapter: MovieListAdapter
 private var movieListViewModel= MovieListViewModel()
 
 
+private lateinit var searchText: EditText
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -38,6 +41,17 @@ private var movieListViewModel= MovieListViewModel()
         recentMovies.adapter = recentMoviesAdapter
         favoriteMoviesAdapter.updateMovies(movieListViewModel.getFavoriteMovies())
         recentMoviesAdapter.updateMovies(movieListViewModel.getRecentMovies())
+
+        searchText=findViewById(R.id.searchText)
+        if(intent?.action == Intent.ACTION_SEND && intent?.type == "text/plain"){
+            handleSendText(intent)
+        }
+    }
+
+    private fun handleSendText(intent: Intent) {
+       intent.getStringExtra(Intent.EXTRA_TEXT)?.let {
+            searchText.setText(it)
+        }
     }
     private fun showMovieDetails(movie: Movie){
         val intent= Intent(this, MovieDetailActivity::class.java).apply {
@@ -45,7 +59,6 @@ private var movieListViewModel= MovieListViewModel()
         }
         startActivity(intent)
     }
-
 
 
 }
