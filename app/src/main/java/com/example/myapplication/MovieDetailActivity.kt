@@ -7,9 +7,11 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.data.Movie
 import com.example.myapplication.viewmodel.MovieDetailViewModel
+
 
 
 class MovieDetailActivity : AppCompatActivity(){
@@ -21,6 +23,7 @@ class MovieDetailActivity : AppCompatActivity(){
     private lateinit var genre : TextView
     private lateinit var website : TextView
     private lateinit var poster : ImageView
+
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -41,6 +44,7 @@ class MovieDetailActivity : AppCompatActivity(){
             finish()
         }
         website.setOnClickListener(){showWebsite()}
+        title.setOnClickListener(){openYouTube()}
 
     }
     private fun showWebsite(){
@@ -53,6 +57,26 @@ class MovieDetailActivity : AppCompatActivity(){
         }
     }
 
+    private fun openYouTube(){
+
+        val titleArray :List<String> =title.text.split(" ").toList()
+
+        var link : String = "https://www.youtube.com/results?search_query=";
+
+        for (x in titleArray ) {
+            link+= "$x+"
+
+        }
+        link += "trailer"
+
+        var youtubeIntent: Intent=Uri.parse(link).let { webpage->
+            Intent(Intent.ACTION_VIEW, webpage)
+        }
+        try {
+            startActivity(youtubeIntent)
+        } catch (e: ActivityNotFoundException) {
+        }
+    }
     private fun populateDetails(){
         title.text=movie.title
         genre.text=movie.genre
