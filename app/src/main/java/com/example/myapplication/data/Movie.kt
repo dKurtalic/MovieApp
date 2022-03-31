@@ -1,5 +1,6 @@
 package com.example.myapplication.data
 
+
 data class Movie(
     val id: Long,
     val title:String,

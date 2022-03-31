@@ -55,8 +55,8 @@ private lateinit var searchText: EditText
             registerReceiver(internetBroadcastReceiver,it)
         }
     }
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroy() {
+        super.onDestroy()
         unregisterReceiver(internetBroadcastReceiver)
     }
 
