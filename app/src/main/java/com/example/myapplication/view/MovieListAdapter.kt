@@ -29,7 +29,7 @@ class MovieListAdapter
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.movieTitle.text = moviesArray[position].title;
-        val genreMatch: String = moviesArray[position].genre
+            val genreMatch: String = moviesArray[position].genre
 
         val context: Context = holder.movieImage.context
         var id: Int = context.resources

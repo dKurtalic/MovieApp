@@ -4,4 +4,6 @@
     <string name="recentMovies">Aktuelni filmovi</string>
     <string name="search">pretraži</string>
     <string name="favoriteMovies">Omiljeni filmovi</string>
+    <string name="favoritesText" translatable="false">Moji omiljeni filmovi</string>
+    <string name="recentText">Najnoviji filmovi koji se prikazuju u kinima i na streaming platformama</string>
 </resources>

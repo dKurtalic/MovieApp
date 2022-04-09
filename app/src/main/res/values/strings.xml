@@ -3,4 +3,6 @@
     <string name="recentMovies">Recent movies</string>
     <string name="search">search</string>
     <string name="favoriteMovies">Favorite movies</string>
+    <string name="favoritesText">My favorite movies</string>
+    <string name="recentText">Latest movies playing in theaters and streaming platforms</string>
 </resources>

@@ -4,4 +4,6 @@
     <string name="recentMovies">Aktuelle Filme</string>
     <string name="search">suche</string>
     <string name="favoriteMovies">Lieblingsfilme</string>
+    <string name="favoritesText" translatable="false">Meine Lieblingsfilme</string>
+    <string name="recentText">Neueste Filme, die in Kinos und Streaming-Plattformen laufen</string>
 </resources>

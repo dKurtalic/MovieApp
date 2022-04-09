@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_favorites"
+        android:icon="@android:drawable/btn_star_big_off"
+        android:title="Favorites"/>
+    <item
+        android:id="@+id/navigation_upcoming"
+        android:icon="@android:drawable/ic_popup_reminder"
+        android:title="Upcoming"/>
+    <item
+        android:id="@+id/navigation_search"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="Search"/>
+</menu>
