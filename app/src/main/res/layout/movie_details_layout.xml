@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,12 +18,14 @@
 
         <ImageView
             android:id="@+id/movie_backdrop"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="467dp"
+            android:layout_height="231dp"
             app:layout_constraintBottom_toBottomOf="@+id/backdrop_guideline"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/pozadina" />
 
         <androidx.cardview.widget.CardView
@@ -28,42 +36,42 @@
             android:layout_marginEnd="8dp"
             app:cardCornerRadius="4dp"
             app:layout_constraintBottom_toBottomOf="@+id/backdrop_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/backdrop_guideline"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/backdrop_guideline">
 
-        <ImageView
-            android:id="@+id/movie_poster"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            <ImageView
+                android:id="@+id/movie_poster"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-    </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/backdrop_guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.4"/>
+            app:layout_constraintGuide_percent="0.36" />
 
         <TextView
             android:id="@+id/movie_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="28dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginTop="8dp"
             android:textColor="@color/lilac"
             android:textSize="24dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@id/movie_poster_card"
-            app:layout_constraintTop_toBottomOf="@id/backdrop_guideline"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/movie_backdrop" />
 
         <TextView
             android:id="@+id/movie_release_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="266dp"
+            android:layout_height="18dp"
             android:textColor="#757575"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@+id/movie_title"
@@ -108,20 +116,45 @@
             app:layout_constraintTop_toBottomOf="@+id/movie_poster_title_barrier"
             tools:textSize="16sp" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+
+        <FrameLayout
+            android:id="@+id/frame_layout_actors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/movie_overview"
+            android:layout_marginTop="30dp">
+        </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/shareButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="339dp"
-        android:layout_marginTop="132dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="50dp"
+        android:layout_marginRight="20dp"
         android:backgroundTint="@color/highlightColor"
         android:clickable="true"
         android:src="@android:drawable/ic_menu_share"
         android:tint="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@id/detailNavigation"
+        app:layout_anchor="@id/detailNavigation"
+        app:layout_anchorGravity="bottom|right|end"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="638dp"  />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/detailNavigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/movie_overview" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        android:translationZ="10dp"
+        app:menu="@menu/actors_and_similar_movies" />
+</androidx.constraintlayout.widget.ConstraintLayout>

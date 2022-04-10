@@ -10,4 +10,10 @@ class MovieDetailViewModel {
         val movie = movies.find {movie-> name.equals(movie.title)}
         return movie?:Movie(0,"Test","Test","Test","Test","Test")
     }
+    fun getActorsByTitle(name:String):List<String>{
+        return MovieRepository.getActors()[name] ?: emptyList()
+    }
+    fun getSimilarByTitle(name:String):List<String>{
+        return MovieRepository.getSimilarMovies()?.get(name)?: emptyList()
+    }
 }

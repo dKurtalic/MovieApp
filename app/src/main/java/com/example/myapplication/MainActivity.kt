@@ -20,6 +20,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavigation: BottomNavigationView
+    private var broadcastReceiver: InternetBroadcastReceiver = InternetBroadcastReceiver()
     private val filter = IntentFilter("android.net.conn.CONNECTIVITY_CHANGE")
 
     private val mOnItemSelectedListener = NavigationBarView.OnItemSelectedListener{ item ->
@@ -61,10 +62,10 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onResume() {
         super.onResume()
-        //registerReceiver(br, filter)
+        registerReceiver(broadcastReceiver, filter)
     }
     override fun onPause() {
-       // unregisterReceiver(br)
+       unregisterReceiver(broadcastReceiver)
         super.onPause()
     }
 }

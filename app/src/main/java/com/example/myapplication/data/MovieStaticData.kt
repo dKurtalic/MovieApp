@@ -35,3 +35,33 @@ fun recentMovies():List<Movie>{
         Movie(13,"The fast and furious", "Los Angeles police officer Brian O'Conner must decide where his loyalty really lies when he becomes enamored with the street racing world he has been sent undercover to destroy.","https://www.imdb.com/title/tt0232500/","22.6.2001", "thriller")
     )
 }
+
+fun movieActors():Map<String,List<String>>{
+    return mapOf<String,List<String>>(
+        "Pride and prejudice" to listOf("Keira Knightley","Matthew Macfadyen","Brenda Blethyn"),
+        "Harry Potter and the Philosopher's Stone" to listOf("Daniel Radcliffe","Emma Watson", "Rupert Grint"),
+        "House of Gucci" to listOf("Lady Gaga","Adam Driver","Al Pacino"),
+        "Home alone" to listOf("Macaulay Culkin","Joe Pesci","Daniel Stern"),
+        "The Intouchables" to listOf("François Cluzet","Omar Sy","Anne Le Ny"),
+        "The pianist" to listOf("Adrien Brody","Thomas Kretschmann","Frank Finlay"),
+        "Dune" to listOf("Timothée Chalamet","Rebecca Ferguson","Zendaya"),
+        "My girl" to listOf("Anna Chlumsky","Macaulay Culkin","Dan Aykroyd"),
+        "Twilight" to listOf("Kristen Stewart","Robert Pattinson","Billy Burke"),
+        "Not So Friendly Neighborhood Affair" to listOf("Branko Đurić", "Izudin Bajrović","Helena Vuković")
+        )
+
+}
+fun similarMovies():Map<String,List<String>>{
+    return mapOf<String,List<String>>(
+        "Pride and prejudice" to listOf("Little woman", "Sense and sensibility", "Atonement"),
+        "Harry Potter and the Philosopher's Stone" to listOf("Harry Potter and the Goblet of Fire", "Harry Potter and the Order of Phoenix", "Harry Potter and the Chamber of Secrets"),
+        "House of Gucci" to listOf("Don't look up", "King Richard", "Spencer"),
+        "Home alone" to listOf("Home alone 2", "Home alone 3","Charlie and the Chocolate Factory"),
+        "The Intouchables" to listOf("The pianist", "Leon: The professional","Life is beautiful"),
+        "The pianist" to listOf("Schindler's List", "Leon: The professional", "Life is beautiful"),
+        "Dune" to listOf("Don't look up", "Spider-Man: No Way Home", "Joker"),
+        "My girl" to listOf("My girl 2", "Sister act", "Father of the Bride"),
+        "Twilight" to listOf("The Twilight Saga: New Moon", "The Twilight Saga: Eclipse", "The Twilight Saga: Breaking Dawn"),
+        "Not So Friendly Neighborhood Affair" to listOf("Toma","Kod amidže Idriza", "It's hard to be nice")
+        )
+}

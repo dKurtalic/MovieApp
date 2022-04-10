@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -24,6 +25,7 @@ class MovieDetailActivity : AppCompatActivity(){
     private lateinit var website : TextView
     private lateinit var poster : ImageView
     private lateinit var shareButton: FloatingActionButton
+    private lateinit var frameLayoutActors:FrameLayout
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -35,6 +37,7 @@ class MovieDetailActivity : AppCompatActivity(){
         website=findViewById(R.id.movie_website)
         poster=findViewById(R.id.movie_poster)
         shareButton=findViewById(R.id.shareButton)
+        frameLayoutActors=findViewById(R.id.frame_layout_actors)
         val extras=intent.extras
 
 
@@ -48,6 +51,9 @@ class MovieDetailActivity : AppCompatActivity(){
         website.setOnClickListener(){showWebsite()}
         title.setOnClickListener(){openYouTube()}
         shareButton.setOnClickListener(){shareButtonAction()}
+
+
+        val actorsFragment
 
     }
     private fun shareButtonAction() {
