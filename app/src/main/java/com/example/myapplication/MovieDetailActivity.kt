@@ -10,9 +10,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.myapplication.data.Movie
+import com.example.myapplication.data.fragments.ActorsFragment
+import com.example.myapplication.data.fragments.SimilarFragment
 import com.example.myapplication.viewmodel.MovieDetailViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationBarView
+import com.google.android.material.navigation.NavigationView
 
 
 class MovieDetailActivity : AppCompatActivity(){
@@ -26,7 +32,24 @@ class MovieDetailActivity : AppCompatActivity(){
     private lateinit var poster : ImageView
     private lateinit var shareButton: FloatingActionButton
     private lateinit var frameLayoutActors:FrameLayout
+    private lateinit var bottomNavigationView: BottomNavigationView
 
+
+    private val bottomNavigationViewListener= NavigationBarView.OnItemSelectedListener {
+            item ->  when(item.itemId){
+        R.id.actors_bar -> {
+            val actorsFragment = ActorsFragment(movie.title)
+            openFragment(actorsFragment)
+            return@OnItemSelectedListener true
+        }
+        R.id.similarMovies_bar ->{
+            val similarFragment= SimilarFragment(movie.title)
+            openFragment(similarFragment)
+            return@OnItemSelectedListener true
+        }
+    }
+        false
+    }
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.movie_details_layout)
@@ -38,9 +61,8 @@ class MovieDetailActivity : AppCompatActivity(){
         poster=findViewById(R.id.movie_poster)
         shareButton=findViewById(R.id.shareButton)
         frameLayoutActors=findViewById(R.id.frame_layout_actors)
+        bottomNavigationView=findViewById(R.id.detailNavigation)
         val extras=intent.extras
-
-
         if (extras!=null){
             movie=movieDetailViewModel.getMovieByTitle(extras.getString("movie_title",""))
             populateDetails()
@@ -52,9 +74,17 @@ class MovieDetailActivity : AppCompatActivity(){
         title.setOnClickListener(){openYouTube()}
         shareButton.setOnClickListener(){shareButtonAction()}
 
+        bottomNavigationView.setOnItemSelectedListener (bottomNavigationViewListener)
+        bottomNavigationView.selectedItemId=R.id.actors_bar
 
-        val actorsFragment
+    }
 
+
+    private fun openFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.frame_layout_actors, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
     private fun shareButtonAction() {
         val intent : Intent = Intent()

@@ -2,11 +2,11 @@
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/actors"
-        android:title="Actors">
-    </item>
+        android:id="@+id/actors_bar"
+        android:title="Actors"/>
+
     <item
-        android:id="@+id/similarMovies"
-        android:title="Similar movies">
-    </item>
+        android:id="@+id/similarMovies_bar"
+        android:title="Similar movies"/>
+
 </menu>
