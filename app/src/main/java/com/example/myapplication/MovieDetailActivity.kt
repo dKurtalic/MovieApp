@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.transition.Fade
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
@@ -52,6 +53,10 @@ class MovieDetailActivity : AppCompatActivity(){
     }
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
+        with(window){
+            sharedElementExitTransition = Fade()
+            exitTransition= Fade()
+        }
         setContentView(R.layout.movie_details_layout)
         title=findViewById(R.id.movie_title)
         releaseDate=findViewById(R.id.movie_release_date)

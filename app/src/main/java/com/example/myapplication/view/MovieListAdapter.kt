@@ -14,7 +14,7 @@ import com.example.myapplication.data.Movie
 
 class MovieListAdapter
     (private var moviesArray: List<Movie>,
-     private val onItemClicked: (movie:Movie) -> Unit)
+     private val onItemClicked: (movie:Movie,view1:View,view2:View) -> Unit)
     : RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>() {
 
         inner class MovieViewHolder(pogled:View): RecyclerView.ViewHolder(pogled){
@@ -29,7 +29,7 @@ class MovieListAdapter
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.movieTitle.text = moviesArray[position].title;
-            val genreMatch: String = moviesArray[position].genre
+        val genreMatch: String = moviesArray[position].genre
 
         val context: Context = holder.movieImage.context
         var id: Int = context.resources
@@ -39,7 +39,7 @@ class MovieListAdapter
         holder.movieImage.setImageResource(id)
 
         holder.itemView.setOnClickListener{
-            onItemClicked(moviesArray[position])
+            onItemClicked(moviesArray[position],holder.movieImage,holder.movieTitle)
         }
         }
 
