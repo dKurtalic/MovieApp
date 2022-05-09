@@ -19,7 +19,7 @@ import com.example.myapplication.viewmodel.MovieListViewModel
 class RecentMoviesFragment: Fragment() {
     private lateinit var recentMovies: RecyclerView
     private lateinit var recentMoviesAdapter: MovieListAdapter
-    private var MovieListViewModel= MovieListViewModel()
+    private var MovieListViewModel= MovieListViewModel(null,null)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view= inflater.inflate(R.layout.recent_fragment,container,false)
         recentMovies=view.findViewById(R.id.recentMovies)

@@ -8,14 +8,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.data.Movie
+
 import com.example.myapplication.data.fragments.FavoriteMoviesFragment
 import com.example.myapplication.data.fragments.RecentMoviesFragment
 import com.example.myapplication.data.fragments.SearchFragment
-import com.example.myapplication.view.MovieListAdapter
-import com.example.myapplication.viewmodel.MovieListViewModel
+
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 class MainActivity : AppCompatActivity() {

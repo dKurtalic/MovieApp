@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.data.Movie
 
@@ -17,7 +18,9 @@ class MovieListAdapter
      private val onItemClicked: (movie:Movie,view1:View,view2:View) -> Unit)
     : RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>() {
 
-        inner class MovieViewHolder(pogled:View): RecyclerView.ViewHolder(pogled){
+    private val posterPath = "https://image.tmdb.org/t/p/w342"
+
+    inner class MovieViewHolder(pogled:View): RecyclerView.ViewHolder(pogled){
             val movieImage=pogled.findViewById<ImageView>(R.id.movieImage)
             val movieTitle=pogled.findViewById<TextView>(R.id.movieTitle)
         }
@@ -29,13 +32,23 @@ class MovieListAdapter
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.movieTitle.text = moviesArray[position].title;
-        val genreMatch: String = moviesArray[position].genre
-
+        val genreMatch: String? = moviesArray[position].genre
         val context: Context = holder.movieImage.context
-        var id: Int = context.resources
-            .getIdentifier(genreMatch, "drawable", context.packageName)
+
+        var id= 0;
+        if (genreMatch!==null)
+            id = context.resources
+                .getIdentifier(genreMatch, "drawable", context.packageName)
         if (id===0) id=context.resources
-            .getIdentifier("romantic", "drawable", context.packageName)
+            .getIdentifier("picture1", "drawable", context.packageName)
+        Glide.with(context)
+            .load(posterPath + moviesArray[position].posterPath)
+            .centerCrop()
+            .placeholder(R.drawable.romantic)
+            .error(id)
+            .fallback(id)
+            .into(holder.movieImage);
+
         holder.movieImage.setImageResource(id)
 
         holder.itemView.setOnClickListener{
