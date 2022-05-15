@@ -24,7 +24,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/pozadina" />
+            app:srcCompat="@drawable/backdrop" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/movie_poster_card"

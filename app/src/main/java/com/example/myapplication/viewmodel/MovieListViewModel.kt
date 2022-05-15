@@ -2,6 +2,7 @@ package com.example.myapplication.viewmodel
 
 import com.example.myapplication.data.Movie
 import com.example.myapplication.data.MovieRepository
+import com.example.myapplication.data.Result
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -26,4 +27,5 @@ class MovieListViewModel (private val searchDone: ((movies: List<Movie>) -> Unit
             }
         }
     }
+
 }

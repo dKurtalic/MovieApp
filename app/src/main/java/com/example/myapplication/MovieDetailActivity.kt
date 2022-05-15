@@ -6,12 +6,13 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.transition.Fade
+import android.util.Log
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.myapplication.data.Movie
 import com.example.myapplication.data.fragments.ActorsFragment
 import com.example.myapplication.data.fragments.SimilarFragment
@@ -19,32 +20,35 @@ import com.example.myapplication.viewmodel.MovieDetailViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationBarView
-import com.google.android.material.navigation.NavigationView
 
 
 class MovieDetailActivity : AppCompatActivity(){
-    private var movieDetailViewModel =  MovieDetailViewModel()
-    private lateinit var movie: Movie
+    private var movieDetailViewModel = MovieDetailViewModel(this@MovieDetailActivity::movieTaken,this@MovieDetailActivity::movieNotTaken,null,null)
+
+    private  var movie=Movie(0,"Test","Test","Test","Test","Test",null,null)
     private lateinit var title : TextView
     private lateinit var overview : TextView
     private lateinit var releaseDate : TextView
     private lateinit var genre : TextView
     private lateinit var website : TextView
     private lateinit var poster : ImageView
+    private lateinit var backdrop : ImageView
     private lateinit var shareButton: FloatingActionButton
     private lateinit var frameLayoutActors:FrameLayout
     private lateinit var bottomNavigationView: BottomNavigationView
+    private val posterPath = "https://image.tmdb.org/t/p/w780"
+    private val backdropPath = "https://image.tmdb.org/t/p/w500"
 
 
     private val bottomNavigationViewListener= NavigationBarView.OnItemSelectedListener {
             item ->  when(item.itemId){
         R.id.actors_bar -> {
-            val actorsFragment = ActorsFragment(movie.title)
+            val actorsFragment = ActorsFragment(movie.title,movie.id)
             openFragment(actorsFragment)
             return@OnItemSelectedListener true
         }
         R.id.similarMovies_bar ->{
-            val similarFragment= SimilarFragment(movie.title)
+            val similarFragment= SimilarFragment(movie.title,movie.id)
             openFragment(similarFragment)
             return@OnItemSelectedListener true
         }
@@ -65,13 +69,18 @@ class MovieDetailActivity : AppCompatActivity(){
         website=findViewById(R.id.movie_website)
         poster=findViewById(R.id.movie_poster)
         shareButton=findViewById(R.id.shareButton)
+        backdrop=findViewById(R.id.movie_backdrop)
         frameLayoutActors=findViewById(R.id.frame_layout_actors)
         bottomNavigationView=findViewById(R.id.detailNavigation)
         val extras=intent.extras
         if (extras!=null){
-            movie=movieDetailViewModel.getMovieByTitle(extras.getString("movie_title",""))
-            populateDetails()
-        }
+            if (extras.containsKey("movie_title")){
+                    movie=movieDetailViewModel.getMovieByTitle(extras.getString("movie_title",""))
+                    populateDetails()
+                 }
+            if (extras.containsKey("movie_id"))
+                movieDetailViewModel.searchSpecificMovie(extras.getLong("movie_id"))
+            }
         else {
             finish()
         }
@@ -133,12 +142,36 @@ class MovieDetailActivity : AppCompatActivity(){
         releaseDate.text=movie.releaseDate
         website.text=movie.homepage
         val context: Context=poster.context
-        var id: Int=context.resources.getIdentifier(movie.genre, "drawable",context.packageName)
+        var id=0
+        if (movie.genre!=null)
+         id=context.resources.getIdentifier(movie.genre, "drawable",context.packageName)
         if (id==0){
             id=context.resources.getIdentifier("romantic","drawable",context.packageName)
         }
+        Glide.with(context)
+            .load(posterPath + movie.posterPath)
+            .placeholder(R.drawable.romantic)
+            .error(id)
+            .fallback(id)
+            .into(poster);
         poster.setImageResource(id)
+        var backdropContext: Context = backdrop.context
+        Glide.with(backdropContext)
+            .load(backdropPath + movie.backdropPath)
+            .centerCrop()
+            .placeholder(R.drawable.backdrop)
+            .error(R.drawable.backdrop)
+            .fallback(R.drawable.backdrop)
+            .into(backdrop);
 
+    }
+
+    private fun movieTaken(movie:Movie) {
+        this.movie=movie
+        populateDetails()
+    }
+    private fun movieNotTaken(){
+        Log.v("MovieDetailActivity","Problem sa prikazom detalja o filmu!")
     }
 
 }
