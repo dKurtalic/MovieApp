@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.content.IntentFilter
+import android.os.Build
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.Toast
@@ -49,6 +50,14 @@ class MainActivity : AppCompatActivity() {
         bottomNavigation.selectedItemId= R.id.navigation_favorites
         val favoritesFragment = FavoriteMoviesFragment.newInstance()
         openFragment(favoritesFragment)
+
+        Intent(this, LatestMovieService::class.java).also {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                startForegroundService(it)
+                return
+            }
+            startService(it)
+        }
     }
 
     private fun openFragment(fragment: Fragment) {
