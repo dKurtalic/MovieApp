@@ -37,7 +37,6 @@ class RecentMoviesFragment: Fragment() {
         return view
     }
 
-
     fun onSuccess(movies:List<Movie>){
         val toast = Toast.makeText(context, "Upcoming movies found", Toast.LENGTH_SHORT)
         toast.show()

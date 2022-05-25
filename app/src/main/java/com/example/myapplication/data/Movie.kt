@@ -2,6 +2,7 @@ package com.example.myapplication.data
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 
 
 data class Movie (
@@ -13,7 +14,7 @@ data class Movie (
     @SerializedName("poster_path") var posterPath: String?,
     @SerializedName("backdrop_path")  var backdropPath: String?
 ): Parcelable{
-    annotation class SerializedName(val value: String)
+
 
     constructor(parcel: Parcel) : this(
         parcel.readLong(),
