@@ -4,6 +4,7 @@ package com.example.myapplication.data
 import android.util.JsonReader
 import android.util.Log
 import com.example.myapplication.BuildConfig
+import com.example.myapplication.view.ApiAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONException
@@ -33,7 +34,7 @@ object MovieRepository {
     }
 
      suspend fun searchMovie(id:Long):Result<Movie>{
-        var film=Movie(0,"Test","Test","Test","Test","Test",null,null)
+        var film=Movie(0,"Test","Test","Test","Test",null,null)
         return withContext(Dispatchers.IO){
             try {
                 val url1="https://api.themoviedb.org/3/movie/$id?api_key=$tmdb_api_key"
@@ -51,7 +52,7 @@ object MovieRepository {
                     val homepage=jo.getString("homepage")
                     val backdropPath=jo.getString("backdrop_path")
                     Log.v("Movie repos",id.toString())
-                    film= Movie(id, title, overview, releaseDate,homepage ,genre,posterPath,backdropPath)
+                    film= Movie(id, title, overview, releaseDate,homepage ,posterPath,backdropPath)
                      }
                 return@withContext Result.Success(film)
         }
@@ -136,7 +137,7 @@ object MovieRepository {
                         val posterPath = movie.getString("poster_path")
                         val overview = movie.getString("overview")
                         val releaseDate = movie.getString("release_date")
-                        movies.add(Movie(id.toLong(), title, overview, releaseDate, null, null, posterPath,null))
+                        movies.add(Movie(id.toLong(), title, overview, releaseDate, null, posterPath,null))
                         if (i == 5) break
                     }
                 }
@@ -149,6 +150,16 @@ object MovieRepository {
             } catch (e: JSONException) {
                 return@withContext Result.Error(Exception("Cannot parse JSON"))
             }
+        }
+    }
+
+    suspend fun getUpcomingMovies(
+    ) : GetMoviesResponse?{
+        return withContext(Dispatchers.IO) {
+            var response = ApiAdapter.retrofit.getUpcomingMovies()
+            val responseBody = response.body()
+            Log.v("MovieRepository", responseBody.toString())
+            return@withContext responseBody
         }
     }
 }

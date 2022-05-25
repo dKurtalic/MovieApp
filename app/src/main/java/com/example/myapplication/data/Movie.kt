@@ -4,22 +4,22 @@ import android.os.Parcel
 import android.os.Parcelable
 
 
-data class Movie(
-    var id: Long,
-    var title:String,
-    var overview:String,
-    var releaseDate:String,
-    var homepage:String?,
-    val genre:String?,
-    var posterPath: String?,
-    var backdropPath:String?
+data class Movie (
+    @SerializedName("id") var id: Long,
+    @SerializedName("title")  var title: String,
+    @SerializedName("overview")  var overview: String,
+    @SerializedName("release_date")   var releaseDate: String,
+    @SerializedName("homepage")   var homepage: String?,
+    @SerializedName("poster_path") var posterPath: String?,
+    @SerializedName("backdrop_path")  var backdropPath: String?
 ): Parcelable{
+    annotation class SerializedName(val value: String)
+
     constructor(parcel: Parcel) : this(
         parcel.readLong(),
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
-        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString()
@@ -32,7 +32,6 @@ data class Movie(
         parcel.writeString(overview)
         parcel.writeString(releaseDate)
         parcel.writeString(homepage)
-        parcel.writeString(genre)
         parcel.writeString(posterPath)
         parcel.writeString(backdropPath)
     }

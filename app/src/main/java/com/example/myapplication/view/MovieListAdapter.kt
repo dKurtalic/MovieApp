@@ -1,6 +1,7 @@
 package com.example.myapplication.view
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,29 +33,19 @@ class MovieListAdapter
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.movieTitle.text = moviesArray[position].title;
-        val genreMatch: String? = moviesArray[position].genre
-        val context: Context = holder.movieImage.context
-
-        var id= 0;
-        if (genreMatch!==null)
-            id = context.resources
-                .getIdentifier(genreMatch, "drawable", context.packageName)
-        if (id===0) id=context.resources
-            .getIdentifier("picture1", "drawable", context.packageName)
+        val context: Context = holder.movieImage.getContext()
+        Log.v("MovieListAdapter: ",moviesArray[position].posterPath.toString())
         Glide.with(context)
             .load(posterPath + moviesArray[position].posterPath)
             .centerCrop()
-            .placeholder(R.drawable.romantic)
-            .error(id)
-            .fallback(id)
+            .placeholder(R.drawable.drama)
+            .error(R.drawable.drama)
+            .fallback(R.drawable.drama)
             .into(holder.movieImage);
 
-        holder.movieImage.setImageResource(id)
+        holder.itemView.setOnClickListener{ onItemClicked(moviesArray[position],holder.movieImage,holder.movieTitle) }
 
-        holder.itemView.setOnClickListener{
-            onItemClicked(moviesArray[position],holder.movieImage,holder.movieTitle)
-        }
-        }
+    }
 
     override fun getItemCount(): Int {
         return moviesArray.size

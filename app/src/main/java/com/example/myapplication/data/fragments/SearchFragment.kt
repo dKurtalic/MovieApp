@@ -44,8 +44,7 @@ class SearchFragment : Fragment() {
         searchButton=view.findViewById(R.id.searchButton)
         searchMoviesAdapter= MovieListAdapter(arrayListOf()){
                 movie, view1, view2 -> showMovieDetails(movie,view1,view2) }
-        movieListViewModel = MovieListViewModel(this@SearchFragment::searchDone,
-                                                this@SearchFragment::onError)
+        movieListViewModel = MovieListViewModel()
         prikazSearcha.adapter=searchMoviesAdapter
         prikazSearcha.layoutManager=GridLayoutManager(activity,2)
         searchButton.setOnClickListener { onClick() }
@@ -66,7 +65,12 @@ class SearchFragment : Fragment() {
     private fun onClick() {
         val toast = Toast.makeText(context, "Search start", Toast.LENGTH_SHORT)
         toast.show()
-        movieListViewModel.search(searchText.text.toString())
+        movieListViewModel.search(searchText.text.toString(),::onSuccess, ::onError)
+    }
+    fun onSuccess(movies:List<Movie>){
+        val toast = Toast.makeText(context, "Upcoming movies found", Toast.LENGTH_SHORT)
+        toast.show()
+        searchMoviesAdapter.updateMovies(movies)
     }
     fun onError() {
         val toast = Toast.makeText(context, "Search error", Toast.LENGTH_SHORT)

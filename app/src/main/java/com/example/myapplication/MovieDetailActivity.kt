@@ -25,7 +25,7 @@ import com.google.android.material.navigation.NavigationBarView
 class MovieDetailActivity : AppCompatActivity(){
     private var movieDetailViewModel = MovieDetailViewModel(this@MovieDetailActivity::movieTaken,this@MovieDetailActivity::movieNotTaken,null,null)
 
-    private  var movie=Movie(0,"Test","Test","Test","Test","Test",null,null)
+    private  var movie=Movie(0,"Test","Test","Test","Test",null,null)
     private lateinit var title : TextView
     private lateinit var overview : TextView
     private lateinit var releaseDate : TextView
@@ -137,31 +137,20 @@ class MovieDetailActivity : AppCompatActivity(){
 
     private fun populateDetails(){
         title.text=movie.title
-        genre.text=movie.genre
         overview.text=movie.overview
         releaseDate.text=movie.releaseDate
         website.text=movie.homepage
         val context: Context=poster.context
-        var id=0
-        if (movie.genre!=null)
-         id=context.resources.getIdentifier(movie.genre, "drawable",context.packageName)
-        if (id==0){
-            id=context.resources.getIdentifier("romantic","drawable",context.packageName)
-        }
+
         Glide.with(context)
             .load(posterPath + movie.posterPath)
             .placeholder(R.drawable.romantic)
-            .error(id)
-            .fallback(id)
             .into(poster);
-        poster.setImageResource(id)
         var backdropContext: Context = backdrop.context
         Glide.with(backdropContext)
             .load(backdropPath + movie.backdropPath)
             .centerCrop()
             .placeholder(R.drawable.backdrop)
-            .error(R.drawable.backdrop)
-            .fallback(R.drawable.backdrop)
             .into(backdrop);
 
     }
